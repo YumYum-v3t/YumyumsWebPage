@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Yumyum-v3t on yt!</title>
+
+<style>
+body{
+margin:0;
+font-family:cursive;
+background:linear-gradient(135deg,#ffd6f6,#d6faff,#e6d6ff);
+overflow:hidden;
+transition:0.5s;
+}
+
+/* WINDOWS */
+.window{
+position:absolute;
+background:white;
+border-radius:15px;
+padding:15px;
+border:2px solid pink;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+cursor:grab;
+}
+
+/* BUTTON */
+button{
+background:#ffb3e6;
+border:none;
+padding:8px;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* FLOATING */
+.float{position:fixed;animation:floatUp 6s linear infinite;}
+@keyframes floatUp{0%{transform:translateY(100vh)}100%{transform:translateY(-10vh)}}
+
+/* CURSOR TRAIL */
+.trail{position:absolute;pointer-events:none;animation:fade 1s forwards;}
+@keyframes fade{to{opacity:0;transform:scale(2);}}
+
+/* CHIBI */
+#chibi{
+position:fixed;
+bottom:0;
+left:0;
+font-size:40px;
+animation:walk 10s linear infinite;
+}
+@keyframes walk{
+0%{left:0;}
+50%{left:80%;}
+100%{left:0;}
+}
+
+/* NIGHT MODE */
+.dark{
+background:linear-gradient(135deg,#2a003f,#000);
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<h1 style="text-align:center;color:#ff8acb;">🌸 Yumyum-v3t on yt! 🌸</h1>
+
+<!-- CLICKER GAME -->
+<div class="window" style="top:80px;left:40px;">
+<h2>💗 Heart Clicker</h2>
+<p>Hearts: <span id="hearts">0</span></p>
+<button onclick="addHeart()">Click 💖</button>
+</div>
+
+<!-- COOKING -->
+<div class="window" style="top:200px;left:250px;">
+<h2>🍓 Cooking</h2>
+<button onclick="cook()">Make Dessert</button>
+<p id="food"></p>
+</div>
+
+<!-- DRESS -->
+<div class="window" style="top:350px;left:500px;">
+<h2>🎀 Dress Up</h2>
+<p id="outfit">Outfit: Basic</p>
+<button onclick="dress()">Change</button>
+</div>
+
+<!-- MUSIC -->
+<div class="window" style="top:150px;left:700px;">
+<h2>🎵 Music</h2>
+<iframe width="200" height="100"
+src="https://www.youtube.com/embed/0eoNKfG4fX4"
+allow="autoplay"></iframe>
+</div>
+
+<!-- TOGGLE -->
+<div class="window" style="top:400px;left:800px;">
+<h2>🌙 Mode</h2>
+<button onclick="toggleMode()">Toggle</button>
+</div>
+
+<!-- CHIBI -->
+<div id="chibi">🐰</div>
+
+<script>
+// CLICKER
+let hearts=0;
+function addHeart(){
+hearts++;
+document.getElementById("hearts").innerText=hearts;
+}
+
+// COOKING
+function cook(){
+const foods=["Mochi 🍓","Magic Cake ✨","Jelly 🌈","CHAOS 😭"];
+document.getElementById("food").innerText=
+foods[Math.floor(Math.random()*foods.length)];
+}
+
+// DRESS
+function dress(){
+const outfits=["Princess 👑","Magical ✨","Goth 🎀","Slayer ⚔️"];
+document.getElementById("outfit").innerText=
+"Outfit: "+outfits[Math.floor(Math.random()*outfits.length)];
+}
+
+// MODE
+function toggleMode(){
+document.body.classList.toggle("dark");
+}
+
+// FLOATING
+setInterval(()=>{
+let e=document.createElement("div");
+e.className="float";
+e.innerText=["💖","✨","🎀","🌸"][Math.floor(Math.random()*4)];
+e.style.left=Math.random()*100+"vw";
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),6000);
+},500);
+
+// TRAIL
+document.addEventListener("mousemove",e=>{
+let t=document.createElement("div");
+t.className="trail";
+t.innerText="✨";
+t.style.left=e.pageX+"px";
+t.style.top=e.pageY+"px";
+document.body.appendChild(t);
+setTimeout(()=>t.remove(),1000);
+});
+
+// DRAG
+let drag=null,ox,oy;
+document.querySelectorAll('.window').forEach(w=>{
+w.onmousedown=e=>{
+drag=w;ox=e.clientX-w.offsetLeft;oy=e.clientY-w.offsetTop;}
+});
+document.onmouseup=()=>drag=null;
+document.onmousemove=e=>{
+if(drag){
+drag.style.left=(e.clientX-ox)+'px';
+drag.style.top=(e.clientY-oy)+'px';
+}
+}
+</script>
+
+</body>
+</html>
