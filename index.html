@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Yumyum-v3t on yt!</title>
+
+<style>
+body{
+margin:0;
+font-family:cursive;
+background:linear-gradient(135deg,#ffd6f6,#d6faff,#e6d6ff);
+overflow:hidden;
+}
+
+/* CUTENESS OVERLOAD */
+.star,.bow{
+position:fixed;
+animation:float 6s linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
+}
+
+/* WINDOWS */
+.window{
+position:absolute;
+background:white;
+border-radius:15px;
+padding:15px;
+border:2px solid pink;
+}
+
+/* BUTTON */
+button{
+background:pink;
+border:none;
+padding:10px;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* GAME */
+#result{
+margin-top:10px;
+color:#ff69b4;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🌸 Yumyum-v3t on yt! 🌸</h1>
+
+<!-- MADOKA SECTION -->
+<div class="window" style="top:100px;left:50px;">
+<h2>🩷 Madoka Magic</h2>
+<p>Magical girl vibes forever ✨</p>
+<p>"Even miracles have a cost..."</p>
+</div>
+
+<!-- COOKING GAME -->
+<div class="window" style="top:200px;left:300px;">
+<h2>🍓 Cute Cooking Game</h2>
+<p>Pick ingredients!</p>
+
+<button onclick="cook('strawberry')">🍓</button>
+<button onclick="cook('chocolate')">🍫</button>
+<button onclick="cook('milk')">🥛</button>
+
+<p id="result"></p>
+</div>
+
+<script>
+// COOKING GAME
+function cook(item){
+const foods=[
+"Strawberry Mochi 🍓",
+"Magical Cupcake ✨",
+"Chocolate Dream Cake 🍫",
+"Chaos Dessert 😭"
+];
+document.getElementById("result").innerText=
+foods[Math.floor(Math.random()*foods.length)];
+}
+
+// FLOATING CUTENESS
+setInterval(()=>{
+let star=document.createElement("div");
+star.className="star";
+star.innerText="✨";
+star.style.left=Math.random()*100+"vw";
+document.body.appendChild(star);
+setTimeout(()=>star.remove(),6000);
+},500);
+</script>
+
+</body>
+</html>
